@@ -30,10 +30,8 @@ export const useDocument = <T = DocumentData>(
   docRef?: DocumentReference<T> | null,
   options?: Options
 ): DocumentHook<T> => {
-  const { error, loading, reset, setError, setValue, value } = useLoadingValue<
-    DocumentSnapshot<T>,
-    FirestoreError
-  >();
+  const { error, loading, reset, setError, setLoading, setValue, value } =
+    useLoadingValue<DocumentSnapshot<T>, FirestoreError>();
   const ref = useIsFirestoreRefEqual<DocumentReference<T>>(docRef, reset);
 
   useEffect(() => {
@@ -41,6 +39,8 @@ export const useDocument = <T = DocumentData>(
       setValue(undefined);
       return;
     }
+
+    setLoading();
     const unsubscribe = options?.snapshotListenOptions
       ? onSnapshot(
           ref.current,
@@ -53,7 +53,7 @@ export const useDocument = <T = DocumentData>(
     return () => {
       unsubscribe();
     };
-  }, [ref.current]);
+  }, [ref.current, setLoading, setValue, setError]);
 
   return [value as DocumentSnapshot<T>, loading, error];
 };
@@ -62,10 +62,8 @@ export const useDocumentOnce = <T = DocumentData>(
   docRef?: DocumentReference<T> | null,
   options?: OnceOptions
 ): DocumentOnceHook<T> => {
-  const { error, loading, reset, setError, setValue, value } = useLoadingValue<
-    DocumentSnapshot<T>,
-    FirestoreError
-  >();
+  const { error, loading, reset, setError, setLoading, setValue, value } =
+    useLoadingValue<DocumentSnapshot<T>, FirestoreError>();
   const isMounted = useIsMounted();
   const ref = useIsFirestoreRefEqual<DocumentReference<T>>(docRef, reset);
 
@@ -75,6 +73,8 @@ export const useDocumentOnce = <T = DocumentData>(
         setValue(undefined);
         return;
       }
+
+      setLoading();
       const get = getDocFnFromGetOptions(options?.getOptions);
 
       try {
@@ -88,7 +88,7 @@ export const useDocumentOnce = <T = DocumentData>(
         }
       }
     },
-    []
+    [isMounted, setLoading, setValue, setError]
   );
 
   const reloadData = useCallback(
@@ -103,7 +103,7 @@ export const useDocumentOnce = <T = DocumentData>(
     }
 
     loadData(ref.current, options);
-  }, [ref.current]);
+  }, [ref.current, loadData, setValue]);
 
   return [value as DocumentSnapshot<T>, loading, error, reloadData];
 };
