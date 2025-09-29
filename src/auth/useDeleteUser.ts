@@ -7,7 +7,7 @@ export type DeleteUserHook = [
   AuthError | Error | undefined,
 ];
 
-export default (auth: Auth): DeleteUserHook => {
+const useDeleteUser = (auth: Auth): DeleteUserHook => {
   const [error, setError] = useState<AuthError>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -31,3 +31,5 @@ export default (auth: Auth): DeleteUserHook => {
 
   return [deleteUser, loading, error];
 };
+
+export { useDeleteUser };

@@ -4,7 +4,7 @@ import { LoadingHook, useLoadingValue } from '../util';
 
 export type TokenHook = LoadingHook<string | null, Error>;
 
-export default (messaging: Messaging, vapidKey?: string): TokenHook => {
+const useToken = (messaging: Messaging, vapidKey?: string): TokenHook => {
   const { error, loading, setError, setValue, value } = useLoadingValue<
     string | null,
     Error
@@ -16,3 +16,5 @@ export default (messaging: Messaging, vapidKey?: string): TokenHook => {
 
   return [value, loading, error];
 };
+
+export { useToken };

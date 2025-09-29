@@ -12,7 +12,7 @@ export type SendPasswordResetEmailHook = [
   AuthError | Error | undefined,
 ];
 
-export default (auth: Auth): SendPasswordResetEmailHook => {
+const useSendPasswordResetEmail = (auth: Auth): SendPasswordResetEmailHook => {
   const [error, setError] = useState<AuthError>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -35,3 +35,5 @@ export default (auth: Auth): SendPasswordResetEmailHook => {
 
   return [sendPasswordResetEmail, loading, error];
 };
+
+export { useSendPasswordResetEmail };

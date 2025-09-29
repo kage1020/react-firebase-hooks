@@ -52,7 +52,7 @@ const reducer =
     }
   };
 
-export default <T, E>(getDefaultValue?: () => T): LoadingValue<T, E> => {
+const useLoadingValue = <T, E>(getDefaultValue?: () => T): LoadingValue<T, E> => {
   const defaultValue = getDefaultValue ? getDefaultValue() : undefined;
   const [state, dispatch] = useReducer(
     reducer<E>(),
@@ -84,3 +84,5 @@ export default <T, E>(getDefaultValue?: () => T): LoadingValue<T, E> => {
     [state.error, state.loading, reset, setError, setValue, state.value]
   );
 };
+
+export { useLoadingValue };

@@ -18,7 +18,7 @@ export type HttpsCallableHook<
   ]
 >;
 
-export default <RequestData = unknown, ResponseData = unknown>(
+const useHttpsCallable = <RequestData = unknown, ResponseData = unknown>(
   functions: Functions,
   name: string
 ): HttpsCallableHook<RequestData, ResponseData> => {
@@ -48,3 +48,5 @@ export default <RequestData = unknown, ResponseData = unknown>(
 
   return [callCallable, loading, error] as const;
 };
+
+export { useHttpsCallable };

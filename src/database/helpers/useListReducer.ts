@@ -226,4 +226,6 @@ const moveChild = (
   return addChild(tempValue, snapshot, previousKey);
 };
 
-export default () => useReducer(listReducer, initialState);
+const useListReducer = () => useReducer(listReducer, initialState);
+
+export { useListReducer };

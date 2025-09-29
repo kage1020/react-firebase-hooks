@@ -8,23 +8,56 @@ export default defineConfig({
     dts({
       include: ['src/**/*'],
       exclude: ['src/**/*.test.ts', 'src/**/*.spec.ts'],
+      rollupTypes: true,
     }),
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'react-firebase-hooks',
-      formats: ['es', 'cjs'],
-      fileName: (format) => {
-        switch (format) {
-          case 'es':
-            return 'index.js';
-          case 'cjs':
-            return 'index.cjs';
-          default:
-            return `index.${format}.js`;
-        }
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        'auth/index': resolve(__dirname, 'src/auth/index.ts'),
+        'firestore/index': resolve(__dirname, 'src/firestore/index.ts'),
+        'database/index': resolve(__dirname, 'src/database/index.ts'),
+        'functions/index': resolve(__dirname, 'src/functions/index.ts'),
+        'messaging/index': resolve(__dirname, 'src/messaging/index.ts'),
+        'storage/index': resolve(__dirname, 'src/storage/index.ts'),
       },
+      fileName: (format, entryName) => {
+        const extension = format === 'es' ? 'js' : 'cjs';
+        return `${entryName}.${extension}`;
+      },
+    },
+    rollupOptions: {
+      external: [
+        'react',
+        'firebase/app',
+        'firebase/auth',
+        'firebase/firestore',
+        'firebase/database',
+        'firebase/functions',
+        'firebase/messaging',
+        'firebase/storage',
+      ],
+      output: [
+        {
+          format: 'es',
+          preserveModules: true,
+          preserveModulesRoot: 'src',
+          entryFileNames: '[name].js',
+          globals: {
+            react: 'React',
+          },
+        },
+        {
+          format: 'cjs',
+          preserveModules: true,
+          preserveModulesRoot: 'src',
+          entryFileNames: '[name].cjs',
+          globals: {
+            react: 'React',
+          },
+        },
+      ],
     },
     sourcemap: true,
     minify: true,

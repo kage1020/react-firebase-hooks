@@ -11,7 +11,7 @@ import {
 } from 'firebase/firestore';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useLoadingValue } from '../util';
-import useIsMounted from '../util/useIsMounted';
+import { useIsMounted } from '../util/useIsMounted';
 import { useIsFirestoreQueryEqual } from './helpers';
 import {
   CollectionDataHook,

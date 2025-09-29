@@ -19,7 +19,7 @@ export type UploadFileHook = [
   StorageError | undefined,
 ];
 
-export default (): UploadFileHook => {
+const useUploadFile = (): UploadFileHook => {
   const [error, setError] = useState<StorageError>();
   const [uploading, setUploading] = useState<boolean>(false);
   const [snapshot, setSnapshot] = useState<UploadTaskSnapshot>();
@@ -30,7 +30,7 @@ export default (): UploadFileHook => {
       data: Blob | Uint8Array | ArrayBuffer,
       metadata?: UploadMetadata | undefined
     ): Promise<UploadResult | undefined> => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         setUploading(true);
         setError(undefined);
         const uploadTask = uploadBytesResumable(storageRef, data, metadata);
@@ -60,3 +60,5 @@ export default (): UploadFileHook => {
 
   return [uploadFile, uploading, snapshot, error];
 };
+
+export { useUploadFile };
