@@ -1,18 +1,14 @@
 {
-  "functions": {
-    "runtime": "node16"
-  },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "emulators": {
-    "firestore": {
-      "port": 8080
-    },
-    "ui": {
-      "enabled": false
-    },
-    "singleProjectMode": true
+  "functions": {
+    "ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log"],
+    "predeploy": "pnpm install --frozen-lockfile && pnpm --filter functions build",
+    "source": "src"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }

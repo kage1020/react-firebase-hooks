@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "demo-noop"
+    "default": "cascade-preview",
+    "dev": "cascade-preview",
+    "prod": "cascade-prod"
   }
 }
