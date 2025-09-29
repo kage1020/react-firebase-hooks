@@ -11,7 +11,7 @@ export type SendEmailVerificationHook = [
   AuthError | Error | undefined,
 ];
 
-export default (auth: Auth): SendEmailVerificationHook => {
+const useSendEmailVerification = (auth: Auth): SendEmailVerificationHook => {
   const [error, setError] = useState<AuthError>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -35,3 +35,5 @@ export default (auth: Auth): SendEmailVerificationHook => {
 
   return [sendEmailVerification, loading, error];
 };
+
+export { useSendEmailVerification };

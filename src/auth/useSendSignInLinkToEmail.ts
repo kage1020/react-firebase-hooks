@@ -12,7 +12,7 @@ export type SendSignInLinkToEmailHook = [
   AuthError | Error | undefined,
 ];
 
-export default (auth: Auth): SendSignInLinkToEmailHook => {
+const useSendSignInLinkToEmail = (auth: Auth): SendSignInLinkToEmailHook => {
   const [error, setError] = useState<AuthError>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -35,3 +35,5 @@ export default (auth: Auth): SendSignInLinkToEmailHook => {
 
   return [sendSignInLinkToEmail, loading, error];
 };
+
+export { useSendSignInLinkToEmail };

@@ -11,7 +11,7 @@ import {
 import { useEffect, useMemo } from 'react';
 import { useIsEqualRef } from '../util';
 import { snapshotToData, ValOptions } from './helpers';
-import useListReducer from './helpers/useListReducer';
+import { useListReducer } from './helpers/useListReducer';
 import { ListHook, ListKeysHook, ListValsHook, Val } from './types';
 
 export const useList = (query?: Query | null): ListHook => {

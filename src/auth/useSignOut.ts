@@ -7,7 +7,7 @@ export type SignOutHook = [
   AuthError | Error | undefined,
 ];
 
-export default (auth: Auth): SignOutHook => {
+const useSignOut = (auth: Auth): SignOutHook => {
   const [error, setError] = useState<AuthError>();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -27,3 +27,5 @@ export default (auth: Auth): SignOutHook => {
 
   return [signOut, loading, error];
 };
+
+export { useSignOut };

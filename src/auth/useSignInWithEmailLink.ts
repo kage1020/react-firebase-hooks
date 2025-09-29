@@ -7,7 +7,7 @@ import {
 import { useCallback, useState } from 'react';
 import { SignInWithEmailLinkHook } from './types';
 
-export default (auth: Auth): SignInWithEmailLinkHook => {
+const useSignInWithEmailLink = (auth: Auth): SignInWithEmailLinkHook => {
   const [error, setError] = useState<AuthError>();
   const [loggedInUser, setLoggedInUser] = useState<UserCredential>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,3 +32,5 @@ export default (auth: Auth): SignInWithEmailLinkHook => {
 
   return [signInWithEmailLink, loggedInUser, loading, error];
 };
+
+export { useSignInWithEmailLink };

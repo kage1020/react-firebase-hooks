@@ -8,7 +8,7 @@ import { LoadingHook, useComparatorRef, useLoadingValue } from '../util';
 
 export type DownloadURLHook = LoadingHook<string, StorageError>;
 
-export default (storageRef?: StorageReference | null): DownloadURLHook => {
+const useDownloadURL = (storageRef?: StorageReference | null): DownloadURLHook => {
   const { error, loading, reset, setError, setValue, value } = useLoadingValue<
     string,
     StorageError
@@ -25,6 +25,8 @@ export default (storageRef?: StorageReference | null): DownloadURLHook => {
 
   return [value, loading, error];
 };
+
+export { useDownloadURL };
 
 const isEqual = (
   v1: StorageReference | null | undefined,

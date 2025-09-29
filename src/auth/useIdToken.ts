@@ -8,7 +8,7 @@ type IdTokenOptions = {
   onUserChanged?: (user: User | null) => Promise<void>;
 };
 
-export default (auth: Auth, options?: IdTokenOptions): IdTokenHook => {
+const useIdToken = (auth: Auth, options?: IdTokenOptions): IdTokenHook => {
   const { error, loading, setError, setValue, value } = useLoadingValue<
     User | null,
     Error
@@ -38,3 +38,5 @@ export default (auth: Auth, options?: IdTokenOptions): IdTokenHook => {
 
   return [value, loading, error];
 };
+
+export { useIdToken };

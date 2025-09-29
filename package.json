@@ -1,6 +1,6 @@
 {
   "name": "@kage1020/react-firebase-hooks",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Hooks for Firebase",
   "author": "kage1020",
   "license": "Apache-2.0",
@@ -11,6 +11,47 @@
     "hooks",
     "firebase"
   ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./auth/*": {
+      "types": "./dist/auth/*.d.ts",
+      "import": "./dist/auth/*.js",
+      "require": "./dist/auth/*.cjs"
+    },
+    "./firestore/*": {
+      "types": "./dist/firestore/*.d.ts",
+      "import": "./dist/firestore/*.js",
+      "require": "./dist/firestore/*.cjs"
+    },
+    "./database/*": {
+      "types": "./dist/database/*.d.ts",
+      "import": "./dist/database/*.js",
+      "require": "./dist/database/*.cjs"
+    },
+    "./functions/*": {
+      "types": "./dist/functions/*.d.ts",
+      "import": "./dist/functions/*.js",
+      "require": "./dist/functions/*.cjs"
+    },
+    "./messaging/*": {
+      "types": "./dist/messaging/*.d.ts",
+      "import": "./dist/messaging/*.js",
+      "require": "./dist/messaging/*.cjs"
+    },
+    "./storage/*": {
+      "types": "./dist/storage/*.d.ts",
+      "import": "./dist/storage/*.js",
+      "require": "./dist/storage/*.cjs"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -48,5 +89,5 @@
     "firebase": ">= 9.0.0",
     "react": ">= 16.8.0"
   },
-  "typings": "index.d.ts"
+  "sideEffects": false
 }

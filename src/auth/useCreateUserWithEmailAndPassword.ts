@@ -8,7 +8,7 @@ import {
 import { useCallback, useState } from 'react';
 import { CreateUserOptions, EmailAndPasswordActionHook } from './types';
 
-export default (
+const useCreateUserWithEmailAndPassword = (
   auth: Auth,
   options?: CreateUserOptions
 ): EmailAndPasswordActionHook => {
@@ -46,3 +46,5 @@ export default (
 
   return [createUserWithEmailAndPassword, registeredUser, loading, error];
 };
+
+export { useCreateUserWithEmailAndPassword };

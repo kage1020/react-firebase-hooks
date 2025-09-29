@@ -8,7 +8,7 @@ type AuthStateOptions = {
   onUserChanged?: (user: User | null) => Promise<void>;
 };
 
-export default (auth: Auth, options?: AuthStateOptions): AuthStateHook => {
+const useAuthState = (auth: Auth, options?: AuthStateOptions): AuthStateHook => {
   const { error, loading, setError, setValue, value } = useLoadingValue<
     User | null,
     Error
@@ -38,3 +38,5 @@ export default (auth: Auth, options?: AuthStateOptions): AuthStateHook => {
 
   return [value, loading, error];
 };
+
+export { useAuthState };
