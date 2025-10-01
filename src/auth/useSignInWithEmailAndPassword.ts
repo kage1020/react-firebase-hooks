@@ -7,7 +7,9 @@ import {
 import { useCallback, useState } from 'react';
 import { EmailAndPasswordActionHook } from './types';
 
-const useSignInWithEmailAndPassword = (auth: Auth): EmailAndPasswordActionHook => {
+const useSignInWithEmailAndPassword = (
+  auth: Auth
+): EmailAndPasswordActionHook => {
   const [error, setError] = useState<AuthError>();
   const [loggedInUser, setLoggedInUser] = useState<UserCredential>();
   const [loading, setLoading] = useState<boolean>(false);

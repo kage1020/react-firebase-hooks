@@ -8,7 +8,9 @@ import { LoadingHook, useComparatorRef, useLoadingValue } from '../util';
 
 export type DownloadURLHook = LoadingHook<string, StorageError>;
 
-const useDownloadURL = (storageRef?: StorageReference | null): DownloadURLHook => {
+const useDownloadURL = (
+  storageRef?: StorageReference | null
+): DownloadURLHook => {
   const { error, loading, reset, setError, setValue, value } = useLoadingValue<
     string,
     StorageError

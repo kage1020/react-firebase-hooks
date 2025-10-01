@@ -1,6 +1,6 @@
 {
   "name": "@kage1020/react-firebase-hooks",
-  "version": "0.1.1",
+  "version": "0.1.2-canary.0",
   "description": "React Hooks for Firebase",
   "author": "kage1020",
   "license": "Apache-2.0",
@@ -66,6 +66,7 @@
     "prepublish": "npm run build",
     "prettier": "prettier --check .",
     "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:ci": "firebase emulators:exec --only firestore 'npx vitest run'",
     "test:watch": "vitest watch",
     "test:unit": "vitest run --exclude 'src/**/*.integration.test.*'"
@@ -74,6 +75,7 @@
     "@firebase/rules-unit-testing": "^5.0.0",
     "@testing-library/react": "^15.0.7",
     "@types/react": "^18.3.12",
+    "@vitest/coverage-v8": "^3.2.4",
     "firebase": "^12.3.0",
     "firebase-tools": "^14.17.0",
     "jsdom": "^27.0.0",
