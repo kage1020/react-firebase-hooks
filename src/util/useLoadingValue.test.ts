@@ -17,14 +17,6 @@ describe('useLoadingValue', () => {
     it('sets error to undefined when setValue is called');
   });
 
-  describe('setLoading function', () => {
-    it('sets loading to true when setLoading is called');
-    
-    it('sets error to undefined when setLoading is called');
-    
-    it('preserves value when setLoading is called');
-  });
-
   describe('setError function', () => {
     it('sets error when setError is called');
     
@@ -52,7 +44,7 @@ describe('useLoadingValue', () => {
   });
 
   describe('callback stability', () => {
-    it('memoizes setValue, setError, setLoading with useCallback');
+    it('memoizes setValue, setError with useCallback');
     
     it('memoizes reset with getDefaultValue dependency');
   });
