@@ -103,7 +103,7 @@ export const useDocumentOnce = <T = DocumentData>(
     }
 
     loadData(ref.current, options);
-  }, [ref.current, loadData, setValue]);
+  }, [ref.current, options, loadData, setValue]);
 
   return [value as DocumentSnapshot<T>, loading, error, reloadData];
 };
