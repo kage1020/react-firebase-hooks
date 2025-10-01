@@ -1,6 +1,6 @@
 {
   "name": "@kage1020/react-firebase-hooks",
-  "version": "0.1.2-canary.1",
+  "version": "0.1.2-canary.2",
   "description": "React Hooks for Firebase",
   "author": "kage1020",
   "license": "Apache-2.0",
