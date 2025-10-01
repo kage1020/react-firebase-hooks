@@ -5,10 +5,30 @@
   },
   "functions": {
     "ignore": ["node_modules", ".git", "firebase-debug.log", "firebase-debug.*.log"],
-    "predeploy": "pnpm install --frozen-lockfile && pnpm --filter functions build",
     "source": "src"
   },
   "storage": {
     "rules": "storage.rules"
+  },
+  "emulators": {
+    "singleProjectMode": true,
+    "firestore": {
+      "port": 8080
+    },
+    "ui": {
+      "enabled": true
+    },
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "database": {
+      "port": 9000
+    },
+    "storage": {
+      "port": 9199
+    }
   }
 }

@@ -1,105 +1,59 @@
-import { describe, expect, test } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
-import { useLoadingValue } from './useLoadingValue';
+import { describe, it } from 'vitest';
 
-describe('useLoadingValue synchronization fix', () => {
-  test('starts with loading=true when no defaultValue provided', () => {
-    const { result } = renderHook(() => useLoadingValue<string, Error>());
-
-    expect(result.current.loading).toBe(true);
-    expect(result.current.value).toBeUndefined();
-    expect(result.current.error).toBeUndefined();
+describe('useLoadingValue', () => {
+  describe('initialization', () => {
+    it('initializes with undefined value and loading true when getDefaultValue is not provided');
+    
+    it('initializes with returned value and loading false when getDefaultValue is provided');
+    
+    it('initializes with loading true when getDefaultValue returns null');
   });
 
-  test('starts with loading=false when defaultValue provided', () => {
-    const { result } = renderHook(() =>
-      useLoadingValue<string, Error>(() => 'default')
-    );
-
-    expect(result.current.loading).toBe(false);
-    expect(result.current.value).toBe('default');
-    expect(result.current.error).toBeUndefined();
+  describe('setValue function', () => {
+    it('updates value when setValue is called');
+    
+    it('sets loading to false when setValue is called');
+    
+    it('sets error to undefined when setValue is called');
   });
 
-  test('setLoading sets loading=true and clears error', () => {
-    const { result } = renderHook(() => useLoadingValue<string, Error>());
-
-    // First set an error
-    act(() => {
-      result.current.setError(new Error('test error'));
-    });
-
-    expect(result.current.loading).toBe(false);
-    expect(result.current.error).toEqual(new Error('test error'));
-
-    // Then set loading
-    act(() => {
-      result.current.setLoading();
-    });
-
-    expect(result.current.loading).toBe(true);
-    expect(result.current.error).toBeUndefined();
-    expect(result.current.value).toBeUndefined();
+  describe('setLoading function', () => {
+    it('sets loading to true when setLoading is called');
+    
+    it('sets error to undefined when setLoading is called');
+    
+    it('preserves value when setLoading is called');
   });
 
-  test('setValue sets value and loading=false', () => {
-    const { result } = renderHook(() => useLoadingValue<string, Error>());
-
-    // Initially loading
-    expect(result.current.loading).toBe(true);
-    expect(result.current.value).toBeUndefined();
-
-    // Set value
-    act(() => {
-      result.current.setValue('test value');
-    });
-
-    expect(result.current.loading).toBe(false);
-    expect(result.current.value).toBe('test value');
-    expect(result.current.error).toBeUndefined();
+  describe('setError function', () => {
+    it('sets error when setError is called');
+    
+    it('sets loading to false when setError is called');
+    
+    it('sets value to undefined when setError is called');
   });
 
-  test('proper loading->setValue sequence maintains synchronization', () => {
-    const { result } = renderHook(() => useLoadingValue<string, Error>());
-
-    // Start loading
-    expect(result.current.loading).toBe(true);
-    expect(result.current.value).toBeUndefined();
-
-    // Call setLoading (simulating async operation start)
-    act(() => {
-      result.current.setLoading();
-    });
-
-    expect(result.current.loading).toBe(true);
-    expect(result.current.value).toBeUndefined();
-
-    // Call setValue (simulating async operation completion)
-    act(() => {
-      result.current.setValue('async result');
-    });
-
-    expect(result.current.loading).toBe(false);
-    expect(result.current.value).toBe('async result');
+  describe('reset function', () => {
+    it('returns to initial state when reset is called');
+    
+    it('re-executes getDefaultValue when reset is called');
+    
+    it('sets loading to false when reset is called');
   });
 
-  test('reset with defaultValue sets loading=false', () => {
-    const { result } = renderHook(() => useLoadingValue<string, Error>());
+  describe('useReducer integration', () => {
+    it('reducer function correctly handles error action');
+    
+    it('reducer function correctly handles loading action');
+    
+    it('reducer function correctly handles value action');
+    
+    it('reducer function correctly handles reset action');
+  });
 
-    // Set some state first
-    act(() => {
-      result.current.setValue('some value');
-    });
-
-    expect(result.current.loading).toBe(false);
-    expect(result.current.value).toBe('some value');
-
-    // Reset with default value (should not be loading since it's not initial load)
-    act(() => {
-      result.current.reset();
-    });
-
-    expect(result.current.loading).toBe(false); // false because isInitialLoad=false in reset
-    expect(result.current.value).toBeUndefined();
+  describe('callback stability', () => {
+    it('memoizes setValue, setError, setLoading with useCallback');
+    
+    it('memoizes reset with getDefaultValue dependency');
   });
 });

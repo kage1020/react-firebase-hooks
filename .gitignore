@@ -17,6 +17,7 @@ coverage
 #test files
 /example
 fire*.log
+*.log
 /.idea/
 
 # Editor directories and files
