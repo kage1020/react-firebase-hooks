@@ -1,6 +1,6 @@
 {
   "name": "@kage1020/react-firebase-hooks",
-  "version": "0.1.2-canary.2",
+  "version": "0.1.2-canary.3",
   "description": "React Hooks for Firebase",
   "author": "kage1020",
   "license": "Apache-2.0",
@@ -21,35 +21,35 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./auth/*": {
-      "types": "./dist/auth/*.d.ts",
-      "import": "./dist/auth/*.js",
-      "require": "./dist/auth/*.cjs"
+    "./auth": {
+      "types": "./dist/auth/index.d.ts",
+      "import": "./dist/auth/index.js",
+      "require": "./dist/auth/index.cjs"
     },
-    "./firestore/*": {
-      "types": "./dist/firestore/*.d.ts",
-      "import": "./dist/firestore/*.js",
-      "require": "./dist/firestore/*.cjs"
+    "./firestore": {
+      "types": "./dist/firestore/index.d.ts",
+      "import": "./dist/firestore/index.js",
+      "require": "./dist/firestore/index.cjs"
     },
-    "./database/*": {
-      "types": "./dist/database/*.d.ts",
-      "import": "./dist/database/*.js",
-      "require": "./dist/database/*.cjs"
+    "./database": {
+      "types": "./dist/database/index.d.ts",
+      "import": "./dist/database/index.js",
+      "require": "./dist/database/index.cjs"
     },
-    "./functions/*": {
-      "types": "./dist/functions/*.d.ts",
-      "import": "./dist/functions/*.js",
-      "require": "./dist/functions/*.cjs"
+    "./functions": {
+      "types": "./dist/functions/index.d.ts",
+      "import": "./dist/functions/index.js",
+      "require": "./dist/functions/index.cjs"
     },
-    "./messaging/*": {
-      "types": "./dist/messaging/*.d.ts",
-      "import": "./dist/messaging/*.js",
-      "require": "./dist/messaging/*.cjs"
+    "./messaging": {
+      "types": "./dist/messaging/index.d.ts",
+      "import": "./dist/messaging/index.js",
+      "require": "./dist/messaging/index.cjs"
     },
-    "./storage/*": {
-      "types": "./dist/storage/*.d.ts",
-      "import": "./dist/storage/*.js",
-      "require": "./dist/storage/*.cjs"
+    "./storage": {
+      "types": "./dist/storage/index.d.ts",
+      "import": "./dist/storage/index.js",
+      "require": "./dist/storage/index.cjs"
     }
   },
   "files": [
