@@ -37,10 +37,8 @@ export const useDocument = <T = DocumentData>(
   const ref = useIsFirestoreRefEqual<DocumentReference<T>>(docRef, reset);
 
   useEffect(() => {
-    if (!ref.current) {
-      setValue(undefined);
-      return;
-    }
+    if (!ref.current) return;
+
     const unsubscribe = options?.snapshotListenOptions
       ? onSnapshot(
           ref.current,
@@ -53,7 +51,7 @@ export const useDocument = <T = DocumentData>(
     return () => {
       unsubscribe();
     };
-  }, [ref.current]);
+  }, [ref.current, setValue, setError]);
 
   return [value as DocumentSnapshot<T>, loading, error];
 };
@@ -71,10 +69,8 @@ export const useDocumentOnce = <T = DocumentData>(
 
   const loadData = useCallback(
     async (reference?: DocumentReference<T> | null, options?: OnceOptions) => {
-      if (!reference) {
-        setValue(undefined);
-        return;
-      }
+      if (!reference) return;
+
       const get = getDocFnFromGetOptions(options?.getOptions);
 
       try {
@@ -88,7 +84,7 @@ export const useDocumentOnce = <T = DocumentData>(
         }
       }
     },
-    []
+    [isMounted, setValue, setError]
   );
 
   const reloadData = useCallback(
@@ -97,13 +93,10 @@ export const useDocumentOnce = <T = DocumentData>(
   );
 
   useEffect(() => {
-    if (!ref.current) {
-      setValue(undefined);
-      return;
-    }
+    if (!ref.current) return;
 
     loadData(ref.current, options);
-  }, [ref.current]);
+  }, [ref.current, options, loadData, setValue]);
 
   return [value as DocumentSnapshot<T>, loading, error, reloadData];
 };
