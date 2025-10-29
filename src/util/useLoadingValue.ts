@@ -20,9 +20,10 @@ type ResetAction = { type: 'reset'; defaultValue?: any };
 type ValueAction = { type: 'value'; value: any };
 type ReducerAction<E> = ErrorAction<E> | ResetAction | ValueAction;
 
-const defaultState = (defaultValue?: any) => {
+const defaultState = (defaultValue?: any, isInitialLoad = true) => {
   return {
-    loading: defaultValue === undefined || defaultValue === null,
+    loading:
+      isInitialLoad && (defaultValue === undefined || defaultValue === null),
     value: defaultValue,
   };
 };
@@ -39,7 +40,7 @@ const reducer =
           value: undefined,
         };
       case 'reset':
-        return defaultState(action.defaultValue);
+        return defaultState(action.defaultValue, state.loading);
       case 'value':
         return {
           ...state,
@@ -52,7 +53,9 @@ const reducer =
     }
   };
 
-const useLoadingValue = <T, E>(getDefaultValue?: () => T): LoadingValue<T, E> => {
+const useLoadingValue = <T, E>(
+  getDefaultValue?: () => T
+): LoadingValue<T, E> => {
   const defaultValue = getDefaultValue ? getDefaultValue() : undefined;
   const [state, dispatch] = useReducer(
     reducer<E>(),

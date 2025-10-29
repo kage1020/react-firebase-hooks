@@ -6,7 +6,6 @@ A set of reusable [React Hooks](https://reactjs.org/docs/hooks-intro.html) for [
 
 [![npm version](https://img.shields.io/npm/v/@kage1020/react-firebase-hooks.svg?style=flat-square)](https://www.npmjs.com/package/@kage1020/react-firebase-hooks)
 
-
 ## Installation
 
 This package requires **React 16.8.0 or later** and **Firebase v9.0.0 or later**.

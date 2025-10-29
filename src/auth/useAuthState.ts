@@ -8,7 +8,10 @@ type AuthStateOptions = {
   onUserChanged?: (user: User | null) => Promise<void>;
 };
 
-const useAuthState = (auth: Auth, options?: AuthStateOptions): AuthStateHook => {
+const useAuthState = (
+  auth: Auth,
+  options?: AuthStateOptions
+): AuthStateHook => {
   const { error, loading, setError, setValue, value } = useLoadingValue<
     User | null,
     Error
