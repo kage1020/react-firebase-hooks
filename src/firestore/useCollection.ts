@@ -137,17 +137,21 @@ export const useCollectionDataOnce = <T = DocumentData>(
 };
 
 const getValuesFromSnapshots = <T>(
-  snapshots: QuerySnapshot<T> | undefined,
+  snapshots: QuerySnapshot<T> | null | undefined,
   options?: SnapshotOptions,
   initialValue?: T[]
-): T[] | undefined => {
-  return useMemo(
-    () =>
-      (snapshots?.docs.map((doc) => doc.data(options)) ?? initialValue) as
-        | T[]
-        | undefined,
-    [snapshots, options]
-  );
+): T[] | null | undefined => {
+  return useMemo(() => {
+    if (!snapshots) {
+      return initialValue ?? undefined;
+    }
+
+    if (snapshots.docs.length === 0) {
+      return initialValue ?? null;
+    }
+
+    return snapshots.docs.map((doc) => doc.data(options));
+  }, [snapshots, options, initialValue]);
 };
 
 const getDocsFnFromGetOptions = (
