@@ -149,12 +149,20 @@ const getDocFnFromGetOptions = (
 };
 
 const getValueFromSnapshot = <T>(
-  snapshot: DocumentSnapshot<T> | undefined,
+  snapshot: DocumentSnapshot<T> | null | undefined,
   options?: SnapshotOptions,
   initialValue?: T
-): T | undefined => {
-  return useMemo(
-    () => (snapshot?.data(options) ?? initialValue) as T | undefined,
-    [snapshot, options, initialValue]
-  );
+): T | null | undefined => {
+  return useMemo(() => {
+    if (!snapshot) {
+      return initialValue ?? undefined;
+    }
+
+    if (!snapshot.exists()) {
+      return initialValue ?? null;
+    }
+
+    const data = snapshot.data(options);
+    return (data ?? initialValue) as T | undefined;
+  }, [snapshot, options, initialValue]);
 };

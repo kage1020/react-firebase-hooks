@@ -1,6 +1,6 @@
 # @kage1020/react-firebase-hooks
 
-A fork of react-firebase-hooks with updated tooling and dependencies.
+A fork of react-firebase-hooks with updated bug fixing and dependencies.
 
 A set of reusable [React Hooks](https://reactjs.org/docs/hooks-intro.html) for [Firebase](https://firebase.google.com/).
 
@@ -39,6 +39,7 @@ import { useCollection } from '@kage1020/react-firebase-hooks/firestore';
 
 This library maintains the same excellent React Hooks API for Firebase while bringing modern tooling benefits:
 
+- 🐛 **Bug fixes** and improvements over the original package
 - ⚡ **Faster builds** with Vite instead of Rollup
 - 🧪 **Better DX** with Vitest instead of Jest
 - 📦 **Improved bundling** with optimized ESM/CJS outputs

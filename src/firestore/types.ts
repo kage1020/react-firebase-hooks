@@ -36,7 +36,7 @@ export type CollectionOnceHook<T = DocumentData> = [
 ];
 export type CollectionDataHook<T = DocumentData> = [
   ...LoadingHook<T[], FirestoreError>,
-  QuerySnapshot<T> | undefined,
+  QuerySnapshot<T> | null | undefined,
 ];
 export type CollectionDataOnceHook<T = DocumentData> = [
   ...CollectionDataHook<T>,
@@ -53,7 +53,7 @@ export type DocumentOnceHook<T = DocumentData> = [
 ];
 export type DocumentDataHook<T = DocumentData> = [
   ...LoadingHook<T, FirestoreError>,
-  DocumentSnapshot<T> | undefined,
+  DocumentSnapshot<T> | null | undefined,
 ];
 export type DocumentDataOnceHook<T = DocumentData> = [
   ...DocumentDataHook<T>,
