@@ -1,6 +1,6 @@
 # @kage1020/react-firebase-hooks
 
-A fork of react-firebase-hooks with updated bug fixing and dependencies.
+A fork of react-firebase-hooks with updated bug fixes and dependencies.
 
 A set of reusable [React Hooks](https://reactjs.org/docs/hooks-intro.html) for [Firebase](https://firebase.google.com/).
 
