@@ -521,7 +521,7 @@ describe('useDocumentData', () => {
       });
     });
 
-    it('returns undefined when document does not exist', async () => {
+    it('returns null when document does not exist (without initialValue)', async () => {
       const mockSnapshot = {
         exists: () => false,
         data: () => undefined,
@@ -535,7 +535,7 @@ describe('useDocumentData', () => {
       const { result } = renderHook(() => useDocumentData(mockDocRef));
 
       await waitFor(() => {
-        expect(result.current[0]).toBeUndefined();
+        expect(result.current[0]).toBeNull();
       });
     });
 
@@ -796,6 +796,21 @@ describe('useDocumentDataOnce', () => {
   });
 
   describe('initialValue combination', () => {
+    it('returns null when document does not exist (without initialValue)', async () => {
+      const mockSnapshot = {
+        exists: () => false,
+        data: () => undefined,
+      } as unknown as DocumentSnapshot;
+
+      vi.mocked(getDoc).mockResolvedValue(mockSnapshot);
+
+      const { result } = renderHook(() => useDocumentDataOnce(mockDocRef));
+
+      await waitFor(() => {
+        expect(result.current[0]).toBeNull();
+      });
+    });
+
     it('returns initialValue when document does not exist', async () => {
       const initialValue = { name: 'initial' };
       const mockSnapshot = {
