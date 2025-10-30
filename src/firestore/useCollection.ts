@@ -146,10 +146,6 @@ const getValuesFromSnapshots = <T>(
       return initialValue ?? undefined;
     }
 
-    if (snapshots.docs.length === 0) {
-      return initialValue ?? null;
-    }
-
     return snapshots.docs.map((doc) => doc.data(options));
   }, [snapshots, options, initialValue]);
 };

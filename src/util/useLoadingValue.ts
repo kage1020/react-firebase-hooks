@@ -5,7 +5,7 @@ export type LoadingValue<T, E> = {
   loading: boolean;
   reset: () => void;
   setError: (error: E) => void;
-  setValue: (value?: T) => void;
+  setValue: (value?: T | null) => void;
   value?: T;
 };
 
@@ -22,8 +22,7 @@ type ReducerAction<E> = ErrorAction<E> | ResetAction | ValueAction;
 
 const defaultState = (defaultValue?: any, isInitialLoad = true) => {
   return {
-    loading:
-      isInitialLoad && (defaultValue === undefined || defaultValue === null),
+    loading: isInitialLoad && defaultValue === undefined,
     value: defaultValue,
   };
 };
@@ -71,7 +70,7 @@ const useLoadingValue = <T, E>(
     dispatch({ type: 'error', error });
   }, []);
 
-  const setValue = useCallback((value?: T) => {
+  const setValue = useCallback((value?: T | null) => {
     dispatch({ type: 'value', value });
   }, []);
 
