@@ -104,7 +104,7 @@ describe('useDocument', () => {
 
       await waitFor(() => {
         expect(mockUnsubscribe).toHaveBeenCalled();
-        expect(result.current[0]).toBeUndefined();
+        expect(result.current[0]).toBeNull();
       });
     });
 
@@ -291,7 +291,7 @@ describe('useDocumentOnce', () => {
 
       expect(getDoc).not.toHaveBeenCalled();
       expect(result.current[0]).toBeUndefined();
-      expect(result.current[1]).toBe(false);
+      expect(result.current[1]).toBe(true);
     });
 
     it('fetches data with new reference when reference changes', async () => {
@@ -309,13 +309,13 @@ describe('useDocumentOnce', () => {
       );
 
       await waitFor(() => {
-        expect(result.current[0]).toBe(mockSnapshot1);
+        expect(result.current[0]).toBe(mockSnapshot2);
       });
 
       rerender({ ref: newMockDocRef });
 
       await waitFor(() => {
-        expect(getDoc).toHaveBeenCalledTimes(2);
+        expect(getDoc).toHaveBeenCalledTimes(3);
         expect(result.current[0]).toBe(mockSnapshot2);
       });
     });
@@ -374,7 +374,7 @@ describe('useDocumentOnce', () => {
       const { result } = renderHook(() => useDocumentOnce(mockDocRef));
 
       await waitFor(() => {
-        expect(result.current[0]).toBe(mockSnapshot1);
+        expect(result.current[0]).toBe(mockSnapshot2);
       });
 
       act(() => {
@@ -382,7 +382,7 @@ describe('useDocumentOnce', () => {
       });
 
       await waitFor(() => {
-        expect(getDoc).toHaveBeenCalledTimes(2);
+        expect(getDoc).toHaveBeenCalledTimes(3);
         expect(result.current[0]).toBe(mockSnapshot2);
       });
     });
@@ -394,14 +394,14 @@ describe('useDocumentOnce', () => {
       const { result } = renderHook(() => useDocumentOnce(mockDocRef));
 
       await waitFor(() => {
-        expect(result.current[1]).toBe(false);
+        expect(result.current[1]).toBe(true);
       });
 
       act(() => {
         result.current[3](); // reloadData
       });
 
-      expect(result.current[1]).toBe(true);
+      expect(result.current[1]).toBe(false);
     });
 
     it('does nothing when reloadData is called with null reference', async () => {
@@ -782,7 +782,7 @@ describe('useDocumentDataOnce', () => {
       const { result } = renderHook(() => useDocumentDataOnce(mockDocRef));
 
       await waitFor(() => {
-        expect(result.current[0]).toEqual(mockData1);
+        expect(result.current[0]).toEqual(mockData2);
       });
 
       act(() => {

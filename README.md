@@ -45,6 +45,60 @@ This library maintains the same excellent React Hooks API for Firebase while bri
 - 📦 **Improved bundling** with optimized ESM/CJS outputs
 - 🔧 **Latest dependencies** for better security and performance
 
+## Key Differences from Original
+
+### Null for Empty Data
+
+All hooks in this library return `null` when data doesn't exist after fetching, instead of `undefined`. This allows you to distinguish between three states:
+
+- **`undefined`**: Loading
+- **`null`**: Successfully fetched, but no data exists or query/ref is falsy
+- **`T` / `T[]`**: Data exists
+
+**Example with Firestore:**
+
+```typescript
+const [value, loading, error] = useDocumentData(id ? docRef : null);
+
+if (loading || value === undefined) {
+  return <div>Loading...</div>;
+}
+
+if (id === undefined && value === null) {
+  return <div>No document ID provided</div>;
+}
+
+if (id !== undefined && value === null) {
+  return <div>Document does not exist</div>;
+}
+
+return <div>Document data: {JSON.stringify(value)}</div>;
+```
+
+**Example with Collections:**
+
+```typescript
+const [values, loading, error] = useCollectionData(id ? query : null);
+
+if (loading || values === undefined) {
+  return <div>Loading...</div>;
+}
+
+if (values === null) {
+  return <div>id {id} does not exist</div>;
+}
+
+return <div>Found {values.length} documents</div>;
+```
+
+This behavior applies to data hooks across:
+
+- Firestore (`useDocumentData`, `useCollectionData`)
+- Database (`useObjectVal`, `useListVals`, `useListKeys`)
+- Auth (`useAuthState`, `useIdToken`)
+- Storage (`useDownloadURL`)
+- Messaging (`useToken`)
+
 ## Documentation
 
 The API remains identical to the original package:

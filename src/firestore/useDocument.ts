@@ -37,7 +37,12 @@ export const useDocument = <T = DocumentData>(
   const ref = useIsFirestoreRefEqual<DocumentReference<T>>(docRef, reset);
 
   useEffect(() => {
-    if (!ref.current) return;
+    if (ref.current === undefined) return;
+
+    if (ref.current === null) {
+      setValue(null);
+      return;
+    }
 
     const unsubscribe = options?.snapshotListenOptions
       ? onSnapshot(
@@ -155,7 +160,7 @@ const getValueFromSnapshot = <T>(
 ): T | null | undefined => {
   return useMemo(() => {
     if (!snapshot) {
-      return initialValue ?? undefined;
+      return initialValue ?? snapshot;
     }
 
     if (!snapshot.exists()) {
@@ -163,6 +168,6 @@ const getValueFromSnapshot = <T>(
     }
 
     const data = snapshot.data(options);
-    return (data ?? initialValue) as T | undefined;
+    return data ?? initialValue;
   }, [snapshot, options, initialValue]);
 };
